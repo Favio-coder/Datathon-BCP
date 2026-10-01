@@ -1,66 +1,57 @@
-# BCP Datathon 🚀
+# 🚀 BCP Datathon
 
-Repositorio del equipo para el desarrollo de nuestra solución para la BCP Datathon.
+Repositorio del equipo para el desarrollo de nuestra solución para la **BCP Datathon**.
 
-El repositorio está organizado para permitir que los 5 integrantes trabajen de manera independiente en diferentes modelos, manteniendo una estructura común para la evaluación, comparación y selección de resultados.
+El repositorio está organizado para que los 5 integrantes trabajen de manera independiente en diferentes modelos, manteniendo una estructura común para la **evaluación**, **comparación** y **selección** de resultados.
 
 ---
 
-## Estructura del repositorio
+## 📁 Estructura del repositorio
 
 ```text
 BCP_Datathon/
-│
 ├── codigo/
-│   │
-│   ├── evaluation/
-│   │   └── # Evaluación y comparación de los modelos
-│   │
-│   ├── modelos/
-│   │   ├── modelo_Apellido1.ipynb
-│   │   ├── modelo_Apellido2.ipynb
-│   │   ├── modelo_Apellido3.ipynb
-│   │   ├── modelo_Apellido4.ipynb
-│   │   └── modelo_Apellido5.ipynb
-│   │
-│   └── utils/
-│       └── # Funciones y utilidades compartidas
+│   ├── evaluation/            # Evaluación y comparación de los modelos
+│   ├── modelos/               # Un notebook por integrante
+│   │   ├── modelo_Asturimac.ipynb
+│   │   ├── modelo_Jayo.ipynb
+│   │   ├── modelo_Rojas.ipynb
+│   │   ├── modelo_Perez.ipynb
+│   │   └── modelo_Garcia.ipynb
+│   └── utils/                 # Funciones y utilidades compartidas
 │
-├── data/
-│   └── # Datos utilizados para el proyecto
+├── data/                      # Datos utilizados (NO se modifican)
 │
-├── resultados/
-│   ├── # Métricas
-│   ├── # Predicciones
-│   └── # Gráficos y resultados finales
+├── resultados/                # Métricas, predicciones y gráficos
+│   ├── metricas.csv
+│   ├── predicciones/
+│   └── graficos/
 │
 ├── DATASET_DESCRIPTION.md
 └── Readme.md
 ```
 
-## Organización de los modelos
-Cada integrante tendrá un notebook propio dentro de:
-Cada integrante tendrá un notebook propio dentro de:
+---
 
-codigo/modelos/
+## 👥 Organización de los modelos
 
-El nombre del archivo debe seguir obligatoriamente este formato:
+Cada integrante tiene su propio notebook dentro de `codigo/modelos/`.
 
+El nombre del archivo debe seguir **obligatoriamente** este formato:
+
+```text
 modelo_APELLIDO.ipynb
+```
 
-Por ejemplo:
+Esto permite identificar rápidamente qué integrante desarrolló cada experimento.
 
-codigo/modelos/
-├── modelo01_Asturimac.ipynb
-├── modelo01_Jayo.ipynb
-├── modelo02_Asturimac.ipynb
+> **Nota:** si mejoras un modelo o agregas uno nuevo, debes versionarlo.
 
-Esto permite identificar rápidamente qué integrante desarrolló cada experimento
+---
 
-Nota: en caso mejores un modelo o agregue un nuevo modelo debes versionarlo 
+## 📓 Contenido obligatorio de cada notebook
 
-## Contenido obligatorio de cada modelo
-Cada notebook debe estar organizado de manera similar
+Cada notebook debe seguir esta estructura, en orden:
 
 1. Importación de librerías
 2. Carga de datos
@@ -73,289 +64,257 @@ Cada notebook debe estar organizado de manera similar
 9. Resultados
 10. Conclusiones
 
-Al inicio del notebook se recomienda colocar:
+Se recomienda colocar una cabecera al inicio del notebook:
+
+```python
 # Modelo: XGBoost
 # Autor: Apellido
+```
 
-# Evaluación
-Los modelos serán evaluados utilizando una metodología común.
+---
 
-Los resultados de cada modelo deberán registrarse en:
+## 📊 Evaluación
 
-codigo/evaluation/
+Los modelos se evalúan con una **metodología común** para que los resultados sean comparables.
 
-Aquí se realizará la comparación entre los diferentes modelos desarrollados por el equipo.
+### Métricas
 
-Ejemplo:
+| Métrica | Rol | Obligatoria |
+| :--- | :--- | :---: |
+| **ROC AUC** | Métrica oficial de la Datathon. Define cuál modelo es mejor. | ✅ Sí |
+| F1, Precision, Recall, Accuracy | Análisis complementario del comportamiento del modelo. | ➖ Opcional |
+| Log Loss, KS, Lift | Diagnóstico de calibración y del poder de discriminar. | ➖ Opcional |
 
+> **Regla:** cada integrante puede reportar las métricas que considere útiles, pero **la única métrica válida para comparar y elegir el modelo final es el ROC AUC**.
+
+Si dos modelos no reportan ROC AUC bajo la misma metodología, **no son comparables**.
+
+### Registro de resultados
+
+Los resultados de cada modelo se registran en `codigo/evaluation/`, donde se realiza la comparación entre los modelos del equipo:
+
+```text
 codigo/evaluation/
 ├── comparacion_modelos.ipynb
 └── ...
+```
 
-La comparación deberá considerar la métrica oficial utilizada por la Datathon: **ROC AUC**.
+### Formato de la tabla comparativa
 
-Cada integrante puede calcular y reportar otras métricas (F1, precision, recall, accuracy, log loss, etc.) para tener un análisis más completo del comportamiento de su modelo. Sin embargo, **la métrica decisiva es ROC AUC**, ya que es la única que permite comparar y elegir el modelo final.
+La columna **ROC AUC** es obligatoria; las demás son opcionales.
 
-Por lo tanto, la tabla comparativa siempre debe incluir la columna de ROC AUC. Las demás métricas son opcionales y complementarias.
+| Modelo | Integrante | ROC AUC | F1 | Accuracy |
+| :--- | :--- | ---: | ---: | ---: |
+| Random Forest | Asturimac | 0.81 | 0.79 | 0.83 |
+| XGBoost | Jayo | **0.85** | 0.82 | 0.86 |
+| LightGBM | Rojas | 0.83 | 0.78 | 0.84 |
 
-Ejemplo:
+> Los valores son únicamente un ejemplo. **El modelo ganador es el de mayor ROC AUC.**
 
-Modelo	Integrante	ROC AUC	F1	Accuracy
-Random Forest	Asturimac	0.81	0.79	0.83
-XGBoost	Jayo	0.85	0.82	0.86
-LightGBM	Rojas	0.83	0.78	0.84
+---
 
-Los valores anteriores son únicamente un ejemplo. **ROC AUC es la columna de referencia para la comparación y la selección del modelo final.**
+## 🔄 Flujo de trabajo
 
-lujo de trabajo
-
-El flujo general del proyecto será:
-
-              DATASET
+```text
+                      DATASET
+                         │
+                         ▼
+              Exploración del dataset
+                         │
+                         ▼
+                 Preprocesamiento
+                         │
+                         ▼
+        ┌────────────────┼────────────────┐
+        ▼                ▼                ▼
+    Modelo 1         Modelo 2         Modelo 3
+        │                │                │
+        ▼                ▼                ▼
+    Modelo 4         Modelo 5
+        │                │
+        └────────┬───────┘
+                 ▼
+            EVALUACIÓN
                  │
                  ▼
-        Exploración del dataset
+      COMPARACIÓN DE MODELOS
                  │
                  ▼
-          Preprocesamiento
+         MEJORES RESULTADOS
                  │
                  ▼
-        ┌────────┼────────┐
-        │        │        │
-        ▼        ▼        ▼
-     Modelo 1 Modelo 2 Modelo 3
-        │        │        │
-        ▼        ▼        ▼
-     Modelo 4 Modelo 5
-        │        │
-        └────┬───┘
-             ▼
-        EVALUACIÓN
-             │
-             ▼
-     COMPARACIÓN DE MODELOS
-             │
-             ▼
-       MEJORES RESULTADOS
-             │
-             ▼
-       MODELO FINAL
-             │
-             ▼
-       PREDICCIÓN TEST
-             │
-             ▼
-       SUBMISSION FINAL
-📌 Reglas importantes
-1. No modificar los datos originales
+           MODELO FINAL
+                 │
+                 ▼
+          PREDICCIÓN TEST
+                 │
+                 ▼
+         SUBMISSION FINAL
+```
 
-Los archivos originales dentro de data/ deben conservarse sin modificaciones.
+---
 
-Si un integrante necesita transformar los datos, debe guardar el resultado correspondiente y documentar qué transformación realizó.
+## 📌 Reglas importantes
 
-2. Cada integrante trabaja en su propio modelo
+### 1. No modificar los datos originales
 
-No modificar el notebook de otro integrante sin coordinación.
+Los archivos dentro de `data/` se conservan sin modificaciones.
 
-Ejemplo:
+Si necesitas transformar los datos, guarda el resultado aparte y documenta qué transformación hiciste.
 
-modelo_Asturimac.ipynb
-modelo_Jayo.ipynb
-modelo_Rojas.ipynb
-modelo_Perez.ipynb
-modelo_Garcia.ipynb
+### 2. Cada integrante trabaja en su propio modelo
 
-Cada persona es responsable de mantener actualizado su notebook.
+No modifiques el notebook de otro integrante sin coordinación. Cada persona es responsable de mantener actualizado su notebook.
 
-3. ROC AUC es la métrica principal
+### 3. ROC AUC es la métrica principal
 
-Los resultados solamente pueden compararse correctamente si utilizamos la misma métrica y metodología de evaluación.
+Los resultados solo son comparables si usamos la misma métrica y metodología.
 
-La métrica principal y obligatoria de comparación es el **ROC AUC**. Cualquier otra métrica (F1, precision, recall, accuracy, log loss, etc.) puede reportarse adicionalmente para complementar el análisis, pero no debe usarse para decidir cuál modelo es mejor.
+- **ROC AUC** es obligatoria y define el orden de los modelos.
+- Cualquier otra métrica es informativa, no decisiva.
 
-Regla práctica: si dos modelos no tienen ROC AUC comparable, no se pueden comparar.
+### 4. Registrar los experimentos
 
-4. Registrar los experimentos
+Cada notebook debe indicar:
 
-Cada integrante debe indicar dentro de su notebook:
+- Algoritmo utilizado
+- Variables utilizadas
+- Preprocesamiento realizado
+- Feature Engineering
+- Hiperparámetros
+- **ROC AUC obtenido**
+- Observaciones
+- Conclusiones
 
-Algoritmo utilizado.
-Variables utilizadas.
-Preprocesamiento realizado.
-Feature Engineering.
-Hiperparámetros.
-Métrica obtenida.
-Observaciones.
-Conclusiones.
-🌿 Git y ramas
+---
 
-Cada integrante debe trabajar utilizando su propia rama.
+## 🌿 Git y ramas
 
-Formato recomendado:
+Cada integrante trabaja en su propia rama con el formato:
 
+```text
 feature/modelo-apellido
+```
 
-Ejemplo:
-
+```bash
 git checkout -b feature/modelo-asturimac
+```
 
 Otro integrante:
 
+```bash
 git checkout -b feature/modelo-jayo
-🔀 Flujo de Git
+```
 
-El flujo recomendado es:
+### Flujo de Git
 
-                 main
-                   │
-                   ▼
-                develop
-             /     |     \
-            /      |      \
-           ▼       ▼       ▼
-       modelo-1 modelo-2 modelo-3
-           │       │       │
-           ▼       ▼       ▼
-       Pull Request
-             │
-             ▼
-          develop
-             │
-             ▼
-            main
-Antes de comenzar a trabajar
+```text
+              main
+                │
+                ▼
+             develop
+            /   |   \
+           ▼    ▼    ▼
+     modelo-1  modelo-2  modelo-3
+           ▼    ▼    ▼
+        Pull Request
+              │
+              ▼
+           develop
+              │
+              ▼
+             main
+```
+
+Antes de comenzar a trabajar:
+
+```bash
 git checkout develop
 git pull origin develop
-
-Crear una rama:
-
 git checkout -b feature/modelo-apellido
-💾 Commits
+```
 
-Los commits deben describir claramente qué se realizó.
+### Commits
 
-Ejemplos
+Los commits deben describir claramente qué se realizó:
+
+```bash
 git add .
 git commit -m "feat: agrega modelo XGBoost"
 git commit -m "feat: agrega feature engineering"
 git commit -m "fix: corrige preprocesamiento"
 git commit -m "docs: actualiza resultados del modelo"
-📈 Resultados
+```
 
-Los resultados importantes de los modelos deberán almacenarse en:
+---
 
-resultados/
+## 📈 Resultados
 
-Por ejemplo:
+Los resultados importantes se almacenan en `resultados/`:
 
+```text
 resultados/
 ├── metricas.csv
 ├── predicciones/
+│   ├── predicciones_Asturimac.csv
+│   ├── predicciones_Jayo.csv
+│   ├── predicciones_Rojas.csv
+│   ├── predicciones_Perez.csv
+│   └── predicciones_Garcia.csv
 └── graficos/
+```
 
-Las predicciones generadas por cada modelo deben identificarse claramente.
+Cada predicción debe identificarse claramente con el nombre de su autor.
 
-Ejemplo:
+---
 
-resultados/predicciones/
-├── predicciones_Asturimac.csv
-├── predicciones_Jayo.csv
-├── predicciones_Rojas.csv
-├── predicciones_Perez.csv
-└── predicciones_Garcia.csv
-🏆 Selección del modelo final
+## 🏆 Selección del modelo final
 
-Una vez que todos los integrantes hayan desarrollado y evaluado sus modelos:
-
+```text
 Modelo 1 ──┐
 Modelo 2 ──┤
 Modelo 3 ──┼──► Comparación ──► Análisis ──► Modelo final
 Modelo 4 ──┤
 Modelo 5 ──┘
+```
 
-El equipo analizará los resultados obtenidos y decidirá qué configuración utilizar para generar la predicción final.
+El equipo analizará los resultados y decidirá qué configuración usar para la predicción final, **priorizando el modelo con mayor ROC AUC**.
 
-También se podrá evaluar la combinación de varios modelos mediante técnicas como:
+También se puede evaluar la combinación de varios modelos mediante:
 
-Voting
-Blending
-Stacking
-Ensemble
+- Voting
+- Blending
+- Stacking
+- Ensemble
 
-si los resultados experimentales justifican su utilización.
+…si los resultados experimentales lo justifican.
 
-🚨 Importante
+### Antes de elegir, verifica
 
-No se debe asumir que un modelo es mejor únicamente porque obtuvo un resultado superior en un experimento aislado.
+- [ ] Misma metodología de evaluación
+- [ ] ROC AUC reportado y comparable
+- [ ] Ausencia de data leakage
+- [ ] Reproducibilidad
+- [ ] Rendimiento en validación
+- [ ] Configuración documentada
+- [ ] Estabilidad del resultado
 
-Antes de seleccionar el modelo final se debe verificar:
+> 🚨 No asumas que un modelo es mejor solo porque obtuvo un resultado superior en un experimento aislado.
 
-Misma metodología de evaluación.
-Misma métrica.
-Ausencia de data leakage.
-Reproducibilidad.
-Rendimiento en validación.
-Configuración utilizada.
-Estabilidad del resultado.
-🎯 Objetivo del repositorio
+---
 
-El objetivo no es simplemente tener cinco algoritmos diferentes.
+## 🎯 Objetivo del repositorio
 
-El objetivo es construir un proceso reproducible:
-
-DATOS
-  ↓
-ANÁLISIS
-  ↓
-PREPROCESAMIENTO
-  ↓
-EXPERIMENTACIÓN
-  ↓
-MODELOS
-  ↓
-EVALUACIÓN
-  ↓
-COMPARACIÓN
-  ↓
-MODELO FINAL
-  ↓
-SUBMISSION
-
-Cada integrante puede experimentar libremente dentro de su modelo, pero todos debemos mantener una metodología común para poder comparar los resultados.
-
-🚀 Regla principal
-
-Cada integrante experimenta por separado, pero todos evaluamos bajo las mismas reglas.
-
-
-### Una mejora que te recomiendo para su equipo
-
-Yo **no pondría el apellido solamente en el notebook**, sino también en la rama y en los archivos de resultados. Así, cuando estén trabajando los 5 simultáneamente, todo queda identificable:
+El objetivo no es simplemente tener cinco algoritmos diferentes, sino construir un proceso reproducible:
 
 ```text
-codigo/
-├── evaluation/
-├── modelos/
-│   ├── modelo_Asturimac.ipynb
-│   ├── modelo_Jayo.ipynb
-│   ├── modelo_Rojas.ipynb
-│   ├── modelo_Perez.ipynb
-│   └── modelo_Garcia.ipynb
-└── utils/
+DATOS → ANÁLISIS → PREPROCESAMIENTO → EXPERIMENTACIÓN
+      → MODELOS → EVALUACIÓN → COMPARACIÓN
+      → MODELO FINAL → SUBMISSION
+```
 
-resultados/
-├── predicciones/
-│   ├── predicciones_Asturimac.csv
-│   ├── predicciones_Jayo.csv
-│   └── ...
-└── metricas.csv
+Cada integrante puede experimentar libremente dentro de su modelo, pero todos mantenemos una metodología común para poder comparar los resultados.
 
-Y las ramas:
-
-feature/modelo-asturimac
-feature/modelo-jayo
-feature/modelo-rojas
-feature/modelo-perez
-feature/modelo-garcia
-
-Así, nadie toca el notebook de otro y el historial de Git queda clarísimo.
+> ### 🚀 Regla principal
+>
+> **Cada integrante experimenta por separado, pero todos evaluamos bajo las mismas reglas: misma metodología y mismo ROC AUC.**
