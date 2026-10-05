@@ -33,6 +33,42 @@ BCP_Datathon/
 
 ---
 
+## 🧰 Entorno local
+
+El proyecto usa un entorno virtual de Python para que todos los integrantes trabajen con las mismas versiones de las librerías.
+
+### Configuración inicial
+
+Desde la raíz del repositorio:
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+### Ejecución de los notebooks
+
+Los notebooks se abren con la extensión **Jupyter** de VS Code. Al abrirlos, selecciona el kernel `.venv (3.14.6)` en la esquina superior derecha para que usen el entorno virtual.
+
+> ⚠️ El notebook debe ejecutarse desde su propia carpeta, porque los datos se cargan con ruta relativa. Por ejemplo, desde `codigo/modelos/Favio/`:
+
+```python
+train = pd.read_csv("../../../data/raw/train.csv")
+```
+
+> Este repositorio ya no depende de Google Colab. Si migraste un notebook desde Colab, reemplaza `from google.colab import files` por una lectura directa del CSV en `data/raw/`.
+
+### Actualización de librerías
+
+Si agregas o actualizas un paquete, regenera el archivo de dependencias con el entorno virtual activado:
+
+```bash
+pip freeze > requirements.txt
+```
+
+---
+
 ## 👥 Organización de los modelos
 
 Cada integrante tiene su propio notebook dentro de `codigo/modelos/`.
